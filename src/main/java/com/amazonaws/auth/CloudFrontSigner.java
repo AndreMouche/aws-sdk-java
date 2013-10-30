@@ -32,7 +32,6 @@ public class CloudFrontSigner extends AbstractAWSSigner {
     /** Shared log for signing debug output */
     private static final Log log = LogFactory.getLog(CloudFrontSigner.class);
 
-    @Override
     public void sign(Request<?> request, AWSCredentials credentials) throws AmazonClientException {
         AWSCredentials sanitizedCredentials = sanitizeCredentials(credentials);
         if ( sanitizedCredentials instanceof AWSSessionCredentials ) {

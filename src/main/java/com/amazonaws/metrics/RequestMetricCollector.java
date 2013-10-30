@@ -61,10 +61,10 @@ public interface RequestMetricCollector {
 
     /** A convenient instance of a no-op request metric collector. */
     public static final RequestMetricCollector NONE = new RequestMetricCollector() {
-        @Override public void collectMetrics(Request<?> request, Object response) {}
-        @Override public boolean start() { return true; }
-        @Override public boolean stop() { return true; }
+        public void collectMetrics(Request<?> request, Object response) {}
+        public boolean start() { return true; }
+        public boolean stop() { return true; }
         /** Always returns false. */
-        @Override public boolean isEnabled() { return false; }
+        public boolean isEnabled() { return false; }
     };
 }

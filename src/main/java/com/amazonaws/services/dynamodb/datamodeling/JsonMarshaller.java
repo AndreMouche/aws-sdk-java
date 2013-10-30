@@ -30,7 +30,6 @@ import com.fasterxml.jackson.databind.MappingJsonFactory;
 @Deprecated
 public class JsonMarshaller<T extends Object> implements DynamoDBMarshaller<T> {
 
-    @Override
     public String marshall(T obj) {
         try {
             JsonFactory jsonFactory = new MappingJsonFactory();
@@ -43,7 +42,6 @@ public class JsonMarshaller<T extends Object> implements DynamoDBMarshaller<T> {
         }
     }
 
-    @Override
     public T unmarshall(Class<T> clazz, String obj) {
         try {
             JsonFactory jsonFactory = new MappingJsonFactory();

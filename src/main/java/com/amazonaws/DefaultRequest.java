@@ -279,12 +279,10 @@ public class DefaultRequest<T> implements Request<T> {
         return builder.toString();
     }
 
-    @Override
     public AWSRequestMetrics getAWSRequestMetrics() {
         return metrics;
     }
 
-    @Override
     public void setAWSRequestMetrics(AWSRequestMetrics metrics) {
         if (this.metrics == null) {
             this.metrics = metrics;

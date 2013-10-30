@@ -160,7 +160,6 @@ public class STSAssumeRoleSessionCredentialsProvider implements AWSCredentialsPr
         securityTokenService = new AWSSecurityTokenServiceClient(longLivedCredentialsProvider, clientConfiguration);
     }
 
-    @Override
     public AWSCredentials getCredentials() {
         if (needsNewSession()) {
             startSession();
@@ -168,7 +167,6 @@ public class STSAssumeRoleSessionCredentialsProvider implements AWSCredentialsPr
         return sessionCredentials;
     }
 
-    @Override
     public void refresh() {
         startSession();
     }

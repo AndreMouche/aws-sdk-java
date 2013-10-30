@@ -115,14 +115,12 @@ public class WebIdentityFederationSessionCredentialsProvider implements AWSCrede
         this.refreshThreshold = DEFAULT_THRESHOLD_SECONDS;
     }
 
-    @Override
     public AWSCredentials getCredentials() {
         if (needsNewSession()) startSession();
 
         return sessionCredentials;
     }
 
-    @Override
     public void refresh() {
         startSession();
     }

@@ -106,7 +106,6 @@ class QueueBufferFuture<Req extends AmazonWebServiceRequest, Res> implements Fut
 
     }
 
-    @Override
     public boolean cancel(boolean arg0) {
         // not cancellable
         return false;
@@ -117,7 +116,6 @@ class QueueBufferFuture<Req extends AmazonWebServiceRequest, Res> implements Fut
     }
     
 
-    @Override
     public Res get() throws InterruptedException, ExecutionException {
         while (true) {
             try {
@@ -130,7 +128,6 @@ class QueueBufferFuture<Req extends AmazonWebServiceRequest, Res> implements Fut
         }
     }
 
-    @Override
     public synchronized Res get(long timeout, TimeUnit tu)
             throws InterruptedException, ExecutionException,
             TimeoutException {
@@ -164,13 +161,11 @@ class QueueBufferFuture<Req extends AmazonWebServiceRequest, Res> implements Fut
         return result;
     }
 
-    @Override
     public boolean isCancelled() {
         // not cancellable
         return false;
     }
 
-    @Override
     public synchronized boolean isDone() {
         return done;
     }

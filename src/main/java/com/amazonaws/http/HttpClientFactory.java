@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
@@ -89,11 +90,30 @@ class HttpClientFactory {
         httpClient.setRedirectStrategy(new LocationHeaderNotRequiredRedirectStrategy());
 
         try {
+  
             Scheme http = new Scheme("http", 80, PlainSocketFactory.getSocketFactory());
-
-            SSLSocketFactory sf = new SSLSocketFactory(
-                    SSLContext.getDefault(),
-                    SSLSocketFactory.STRICT_HOSTNAME_VERIFIER);
+            
+          	//Add by AndreMouche
+            //to avoid ”javax.net.ssl.SSLPeerUnverifiedException: peer not authenticated”。
+        	SSLContext ctx = SSLContext.getInstance("TLS");
+        	X509TrustManager tm = new X509TrustManager() {  
+                  public X509Certificate[] getAcceptedIssuers() {  
+                      return null;  
+                  }  
+                  public void checkClientTrusted(X509Certificate[] arg0, String arg1) throws CertificateException {}  
+                  public void checkServerTrusted(X509Certificate[] arg0, String arg1) throws CertificateException {}  
+              };  
+              try {
+				ctx.init(null, new TrustManager[] { tm }, null);
+			  } catch (KeyManagementException e) {
+				// TODO Auto-generated catch block
+			 	e.printStackTrace();
+			  }  
+              SSLSocketFactory sf = new SSLSocketFactory(ctx, SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);  
+        	//..end By AndreMouche
+//            SSLSocketFactory sf = new SSLSocketFactory(
+//                    SSLContext.getDefault(),
+//                    SSLSocketFactory.STRICT_HOSTNAME_VERIFIER);
             Scheme https = new Scheme("https", 443, sf);
 
             SchemeRegistry sr = connectionManager.getSchemeRegistry();

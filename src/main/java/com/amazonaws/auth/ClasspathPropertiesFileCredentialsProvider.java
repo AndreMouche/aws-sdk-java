@@ -84,7 +84,7 @@ public class ClasspathPropertiesFileCredentialsProvider implements AWSCredential
         try {
             return new PropertiesCredentials(inputStream);
         } catch (IOException e) {
-            throw new AmazonClientException("Unable to load AWS credentials from the " + credentialsFilePath + " file on the classpath", e);
+            throw new AmazonClientException("Unable to load AWS credentials from the " + credentialsFilePath + " file on the classpath~~~ha", e);
         }
     }
 

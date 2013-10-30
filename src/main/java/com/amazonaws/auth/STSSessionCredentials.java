@@ -62,7 +62,7 @@ public class STSSessionCredentials implements AWSRefreshableSessionCredentials {
 	 * obtain a session from STS.
 	 *
 	 * @param credentials
-	 *            Primary AWS account credentials.
+	 *            Primary AWS account credentials.,
 	 * @param sessionDurationSeconds
 	 *            The duration, in seconds, for each session to last.
 	 */
@@ -103,7 +103,6 @@ public class STSSessionCredentials implements AWSRefreshableSessionCredentials {
      * Clients are encouraged to call the atomic
      * {@link RenewableAWSSessionCredentials#getImmutableCredentials()} as a proxy to this method.
      */
-    @Override
     public synchronized String getAWSAccessKeyId() {
         return getSessionCredentials().getAccessKeyId();
     }
@@ -115,7 +114,6 @@ public class STSSessionCredentials implements AWSRefreshableSessionCredentials {
      * Clients are encouraged to call the atomic
      * {@link RenewableAWSSessionCredentials#getImmutableCredentials()} as a proxy to this method.
      */
-    @Override
     public synchronized String getAWSSecretKey() {
         return getSessionCredentials().getSecretAccessKey();
     }
@@ -127,7 +125,6 @@ public class STSSessionCredentials implements AWSRefreshableSessionCredentials {
      * Clients are encouraged to call the atomic
      * {@link RenewableAWSSessionCredentials#getImmutableCredentials()} as a proxy to this method.
      */
-    @Override
     public synchronized String getSessionToken() {
         return getSessionCredentials().getSessionToken();
     }
@@ -143,7 +140,6 @@ public class STSSessionCredentials implements AWSRefreshableSessionCredentials {
     /**
      * Refreshes the session credentials from STS.
      */
-    @Override
     public synchronized void refreshCredentials() {
         GetSessionTokenResult sessionTokenResult = securityTokenService
                 .getSessionToken(new GetSessionTokenRequest().withDurationSeconds(sessionDurationSeconds));

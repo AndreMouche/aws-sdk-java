@@ -104,7 +104,6 @@ public class AmazonSQSBufferedAsyncClient implements AmazonSQSAsync {
     /* (non-Javadoc)
      * @see com.amazonaws.services.sqs.AmazonSQS#setRegion(com.amazonaws.regions.Region)
      */
-    @Override
     public void setRegion(Region region) throws IllegalArgumentException {
         realSQS.setRegion(region);
     }

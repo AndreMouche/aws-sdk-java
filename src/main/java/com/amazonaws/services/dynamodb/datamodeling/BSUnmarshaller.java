@@ -20,7 +20,6 @@ import com.amazonaws.services.dynamodb.model.AttributeValue;
 
 abstract class BSUnmarshaller implements ArgumentUnmarshaller {
 
-    @Override
     public void typeCheck(AttributeValue value, Method setter) {
         if ( value.getBS() == null ) {
             throw new DynamoDBMappingException("Expected BS in value " + value + " when invoking " + setter);

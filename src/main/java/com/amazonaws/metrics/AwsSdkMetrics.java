@@ -235,15 +235,12 @@ public enum AwsSdkMetrics {
      *  Administration of AwsSdkMetrics as an MBean.
      */
     private static class Admin implements AdminMBean {
-        @Override
         public boolean enableDefaultMetrics() {
             return AwsSdkMetrics.enableDefaultMetrics();
         }
-        @Override
         public void disableMetrics() {
             AwsSdkMetrics.disableMetrics();
         }
-        @Override
         public String getRequestMetricCollector() {
             RequestMetricCollector mc = AwsSdkMetrics.mc;
             return mc == null || mc == RequestMetricCollector.NONE
@@ -251,7 +248,6 @@ public enum AwsSdkMetrics {
                  : mc.getClass().getName()
                  ;
         }
-        @Override
         public boolean isMetricsEnabled() {
             RequestMetricCollector mc = AwsSdkMetrics.mc;
             return mc != null && mc.isEnabled();

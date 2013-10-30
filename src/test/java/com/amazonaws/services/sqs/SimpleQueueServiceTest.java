@@ -128,6 +128,7 @@ public class SimpleQueueServiceTest {
 
 	}
 
+	@Test
 	public void testSendAndGetMessage(){
 		String qName = "testSendAndGetMessage";
 		boolean status = createQueue(qName);
@@ -143,23 +144,26 @@ public class SimpleQueueServiceTest {
 			   String messageInfo = String.format("this is my %d message", loop);
 			   SendMessageRequest sendMessageRequest = new SendMessageRequest(qUrl, messageInfo);
 			   SendMessageResult sendMessageResult = sqs.sendMessage(sendMessageRequest);
-			   System.out.printf("MessageId:%s\n",sendMessageResult.getMessageId());
-			   System.out.printf("MessageMD5:%s\n",sendMessageResult.getMD5OfMessageBody());
+			   //System.out.printf("MessageId:%s\n",sendMessageResult.getMessageId());
+			   //System.out.printf("MessageMD5:%s\n",sendMessageResult.getMD5OfMessageBody());
 			 }
 			 
 			int seqNum = 10;
 			for (int loop = 0; loop < testNum/seqNum;loop ++ ){
 				ReceiveMessageRequest receiveMessageRequest = new ReceiveMessageRequest(qUrl);
 				receiveMessageRequest.setVisibilityTimeout(10);
-				receiveMessageRequest.setMaxNumberOfMessages(loop);
+				receiveMessageRequest.setMaxNumberOfMessages(seqNum);
 				ReceiveMessageResult receive = sqs.receiveMessage(receiveMessageRequest);
 				List<Message> messages = receive.getMessages();
+				assertEquals(seqNum, messages.size());
 				for (Message message : messages) {
 					DeleteMessageRequest deleteMessageRequest = new DeleteMessageRequest(qUrl, message.getReceiptHandle());
 					sqs.deleteMessage(deleteMessageRequest);
 					System.out.printf("Delete Message %s", message.getBody());
 				}
 			}
+			
+			success = true;
 			 
 		} catch (AmazonServiceException ase) {
 			processASE(ase);
@@ -212,6 +216,7 @@ public class SimpleQueueServiceTest {
 					System.out.printf("Delete Message %s", message.getBody());
 				}
 			}
+			success = true;
 			 
 		} catch (AmazonServiceException ase) {
 			processASE(ase);

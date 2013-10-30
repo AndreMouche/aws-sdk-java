@@ -408,7 +408,6 @@ public class SendQueueBuffer {
          */
         abstract void process();
 
-        @Override
         public synchronized void run() {
             try {
                 long deadlineMs = TimeUnit.MILLISECONDS.convert(System.nanoTime(), TimeUnit.NANOSECONDS ) + 

@@ -84,7 +84,6 @@ public enum CloudFormationActions implements Action {
 	/* (non-Javadoc)
 	 * @see com.amazonaws.auth.policy.Action#getActionName()
 	 */
-	@Override
 	public String getActionName() {
 		return action;
 	}
